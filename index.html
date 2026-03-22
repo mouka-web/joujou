@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <title>Do you love me?</title>
 <link rel="icon" type="image/png" href="heart.png">
+
 <style>
   body {
     text-align: center;
     font-family: Arial, sans-serif;
     margin: 0;
     background: #ffe6e6;
-    overflow: hidden;
   }
 
   h1, h2 {
@@ -18,26 +18,34 @@
   }
 
   button {
-    padding: 10px 20px;
+    padding: 12px 22px;
     font-size: 18px;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
   }
 
   .yes-btn {
     background-color: green;
     color: white;
   }
+
   .yes-btn1 {
     background-color: rgb(209, 24, 154);
     color: white;
   }
+
   .no-btn {
     background-color: rgb(243, 59, 59);
     color: white;
   }
+
   .no-btn1 {
     background-color: rgb(237, 118, 217);
     color: white;
@@ -48,35 +56,32 @@
     margin-top: 20px;
   }
 
-  /* Conteneur image + message */
+  /* Conteneur final */
   #loveContainer {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100vw;
-    height: 100vh;
-    background-color: #ffe6e6;
-    z-index: 100;
+    width: 100%;
     text-align: center;
   }
 
   #loveImage {
-    width: 30%;
-    height: 50%;
-
-    border-radius: 100px;
+    width: 300px;
+    border-radius: 20px;
+    margin-top: 20px;
   }
 
   #loveMessage {
     font-size: 32px;
     color: #ff0066;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 15px;
   }
 </style>
 </head>
+
 <body>
 
 <!-- Première partie -->
@@ -90,10 +95,12 @@
 <div id="secondChoice">
   <h2>Choose your answer 💖</h2>
   <button id="yes2" class="no-btn1">Yes so much 😍</button>
-  <button id="yes3" class="yes-btn1">My best Mouka ever, you’re mine, my best princess in the world, my queen ❤️ ✅</button>
+  <button id="yes3" class="yes-btn1">
+    My best Mouka ever ❤️
+  </button>
 </div>
 
-<!-- Conteneur image + message -->
+<!-- Résultat final -->
 <div id="loveContainer">
   <img id="loveImage" src="cat.jpg" alt="Love Image">
   <div id="loveMessage">Thank you Joujoutyyyyy ❤️</div>
@@ -101,33 +108,27 @@
 
 <script>
   const noBtn = document.getElementById("no1");
-  const yes2Btn = document.getElementById("yes2");
 
-  // Faire fuir les boutons impossibles à cliquer
-  function makeButtonRun(btn) {
-    btn.addEventListener("mouseover", function() {
-      const x = Math.random() * (window.innerWidth - btn.offsetWidth - 20);
-      const y = Math.random() * (window.innerHeight - btn.offsetHeight - 20);
-      btn.style.position = 'absolute';
-      btn.style.left = x + "px";
-      btn.style.top = y + "px";
-    });
-  }
-
-  makeButtonRun(noBtn);
-  makeButtonRun(yes2Btn);
-
-  // Affiche le second choix après "Yes 😍" et cache la première partie
-  document.getElementById("yes1").addEventListener("click", function() {
-    document.getElementById("firstChoice").style.display = "none"; // cacher la première partie
-    document.getElementById("secondChoice").style.display = "block"; // afficher la deuxième partie
+  // Bouton "No" fuit la souris (fun)
+  noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
   });
 
-  // Bouton final cliquable : affiche l'image et le message
-  document.getElementById("yes3").addEventListener("click", function() {
-    document.getElementById("secondChoice").style.display = 'none'; // cacher la deuxième partie
-    document.getElementById("loveContainer").style.display = 'block'; // afficher image + message
-  });
+  // Passage à étape 2
+  document.getElementById("yes1").onclick = function() {
+    document.getElementById("firstChoice").style.display = "none";
+    document.getElementById("secondChoice").style.display = "block";
+  };
+
+  // Affichage final
+  document.getElementById("yes3").onclick = function() {
+    document.getElementById("secondChoice").style.display = "none";
+    document.getElementById("loveContainer").style.display = "block";
+  };
 </script>
 
 </body>

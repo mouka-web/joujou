@@ -9,6 +9,7 @@ body {
   text-align: center;
   font-family: Arial;
   background: #ffe6e6;
+  overflow: hidden;
 }
 
 #secondChoice {
@@ -26,45 +27,71 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
+  position: relative;
 }
 
 .yes { background: green; color: white; }
 .no { background: red; color: white; }
+.pink { background: pink; }
 
 #loveImage {
   width: 300px;
   margin-top: 20px;
+  border-radius: 20px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- Étape 1 -->
 <div id="firstChoice">
   <h1>Do you love me? ❤️</h1>
   <button id="yes1" class="yes">Yes 😍</button>
   <button id="no1" class="no">No ❌</button>
 </div>
 
+<!-- Étape 2 -->
 <div id="secondChoice">
   <h2>Choose your answer 💖</h2>
-  <button id="yes2" class="no">Yes so much 😍</button>
+  <button id="yes2" class="pink">Yes so much 😍</button>
   <button id="yes3" class="yes">My queen ❤️</button>
 </div>
 
+<!-- Résultat -->
 <div id="loveContainer">
   <img src="cat.jpg">
-  <h2>Thank you ❤️</h2>
+  <h2>Thank you Joujoutyyyy ❤️</h2>
 </div>
 
 <script>
 window.onload = function() {
 
+  const noBtn = document.getElementById("no1");
+  const yes2Btn = document.getElementById("yes2");
+
+  // Fonction pour faire fuir les boutons
+  function makeButtonRun(btn) {
+    btn.addEventListener("mouseover", function() {
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      btn.style.position = "absolute";
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    });
+  }
+
+  // Appliquer l'effet
+  makeButtonRun(noBtn);
+  makeButtonRun(yes2Btn);
+
+  // Passage étape 2
   document.getElementById("yes1").onclick = function() {
     document.getElementById("firstChoice").style.display = "none";
     document.getElementById("secondChoice").style.display = "block";
   };
 
+  // Résultat final
   document.getElementById("yes3").onclick = function() {
     document.getElementById("secondChoice").style.display = "none";
     document.getElementById("loveContainer").style.display = "block";
